@@ -1,3 +1,3 @@
-import FileUpload from "./file-upload";
+import MultipleFileUpload from "./multiple-file-upload";
 
-export default FileUpload;
+export default MultipleFileUpload;

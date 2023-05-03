@@ -1,5 +1,3 @@
-import UploadBox from './upload-box';
-import EnterCustodian from './enter-custodian';
-import UploadProgress from './upload-progress';
+import FileUpload from './file-upload';
 
-export { UploadBox, EnterCustodian, UploadProgress };
+export { FileUpload };

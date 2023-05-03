@@ -5,6 +5,7 @@ import { Constants } from "../util";
 interface EnterCustodianProps {
   setUploadStatus: React.Dispatch<React.SetStateAction<string>>;
   setCustodian: React.Dispatch<React.SetStateAction<string>>;
+  addNewBatch: () => void;
   fileList: UploadFile<any>[];
 }
 
@@ -13,25 +14,37 @@ interface EnterCustodianProps {
  *
  * @param {function} EnterCustodianProps.setUploadStatus - a function to set the upload status
  * @param {function} EnterCustodianProps.setCustodian - a function to set the custodian
+ * @param {function} EnterCustodianProps.addNewBatch - a function that triggers the parent component to show new upload box
  * @param {array} EnterCustodianProps.fileList - an array of files to be uploaded (to get the count of files)
  * @returns {JSX.Element} a form element with input and button components
  */
 const EnterCustodian: React.FC<EnterCustodianProps> = ({
   setUploadStatus,
   setCustodian,
+  addNewBatch,
   fileList,
 }) => {
+  function onSubmit(): void {
+    setUploadStatus(Constants.UploadStateEnum.UPLOADING);
+    addNewBatch();
+  }
   return (
-    <form onSubmit={() => setUploadStatus(Constants.UploadStateEnum.UPLOADING)}>
-      <Card>
+    <form onSubmit={onSubmit} data-testid="enter-custodian-form">
+      <Card style={{ width: "400px" }}>
         <Space size={32} direction="horizontal" align="center">
           <Input
             allowClear
             placeholder="Enter Custodian"
             required
+            data-testid="enter-custodian-input"
             onChange={(e) => setCustodian(e.target.value)}
           />
-          <Button type="primary" htmlType="submit" icon={<UploadOutlined />}>
+          <Button
+            type="primary"
+            htmlType="submit"
+            data-testid="enter-custodian-submit"
+            icon={<UploadOutlined />}
+          >
             Submit {fileList.length} Files
           </Button>
         </Space>
