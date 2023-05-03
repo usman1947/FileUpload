@@ -1,40 +1,55 @@
-import { InboxOutlined } from "@ant-design/icons";
-import type { UploadProps } from "antd";
-import { message, Upload } from "antd";
+import { useState, useEffect } from "react";
+import { UploadFile, Layout } from "antd";
+import { Constants, Utils } from "./util";
+import { UploadBox, EnterCustodian, UploadProgress } from "./components";
 
-const { Dragger } = Upload;
+const { Content } = Layout;
 
-const props: UploadProps = {
-  name: "file",
-  multiple: true,
-  action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-  onChange(info) {
-    const { status } = info.file;
-    if (status !== "uploading") {
-      console.log(info.file, info.fileList);
-    }
-    if (status === "done") {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-  onDrop(e) {
-    console.log("Dropped files", e.dataTransfer.files);
-  },
-  beforeUpload: (file) => {
-    return false;
-  },
+const contentStyle: React.CSSProperties = {
+  height: "100%",
+  width: "100%",
+  padding: "15%",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
 };
 
-const FileUpload: React.FC = () => (
-  <Dragger {...props}>
-    <p className="ant-upload-drag-icon">
-      <InboxOutlined />
-    </p>
-    <p className="ant-upload-text">Click or drag file to this area to upload</p>
-    <p className="ant-upload-hint">Support for a single or bulk upload.</p>
-  </Dragger>
-);
+const FileUpload: React.FC = () => {
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const [uploadStatus, setUploadStatus] = useState<string>(
+    Constants.UploadStateEnum.IDLE
+  );
+  const [uploadPercent, setUploadPercent] = useState<number>(0);
+  const [custodian, setCustodian] = useState<string>("");
+
+  useEffect(() => {
+    if (uploadStatus === Constants.UploadStateEnum.UPLOADING) {
+      Utils.completeProgress(fileList.length, setUploadPercent).then(() => {
+        setUploadStatus(Constants.UploadStateEnum.UPLOADED);
+      });
+    }
+  }, [fileList, uploadStatus]);
+
+  return (
+    <Content style={contentStyle}>
+      {uploadStatus === Constants.UploadStateEnum.UPLOADING ||
+      uploadStatus === Constants.UploadStateEnum.UPLOADED ? (
+        <UploadProgress
+          uploadPercent={uploadPercent}
+          custodian={custodian}
+          uploadStatus={uploadStatus}
+        />
+      ) : fileList.length > 0 ? (
+        <EnterCustodian
+          fileList={fileList}
+          setCustodian={setCustodian}
+          setUploadStatus={setUploadStatus}
+        />
+      ) : (
+        <UploadBox setFileList={setFileList} />
+      )}
+    </Content>
+  );
+};
 
 export default FileUpload;
