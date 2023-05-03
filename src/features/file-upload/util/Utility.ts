@@ -7,28 +7,42 @@ import * as Constants from "./constants";
  * @param setUploadPercent - The function to call with the upload percentage
  * @returns A promise that resolves with 100 when upload is complete
  */
-export function completeProgress(numberOfFiles: number, setUploadPercent: Function): Promise<number> {
-    if (numberOfFiles === 0 || Constants.MockUploadTime === 0) {
-        return Promise.resolve(100);
-    }
-    const updates = numberOfFiles * 10;
-    const duration = numberOfFiles / 2;
-    const interval = (duration * Constants.MockUploadTime) / updates;
-    const increment = 100 / updates;
-
-    return new Promise((resolve) => {
-      let progress = 0;
-      const update = () => {
-        progress += increment;
-        if (progress > 100) {
-          progress = 100;
-        }
-        setUploadPercent(Number(progress.toFixed(2)));
-        if (progress === 100) {
-          clearInterval(intervalId);
-          resolve(progress);
-        }
-      };
-      const intervalId = setInterval(update, interval);
-    });
+export function completeProgress(
+  numberOfFiles: number,
+  setUploadPercent: Function
+): Promise<number> {
+  if (numberOfFiles === 0 || Constants.MockUploadTime === 0) {
+    return Promise.resolve(100);
   }
+  const updates = numberOfFiles * 10;
+  const duration = numberOfFiles / 2;
+  const interval = (duration * Constants.MockUploadTime) / updates;
+  const increment = 100 / updates;
+
+  return new Promise((resolve) => {
+    let progress = 0;
+    const update = () => {
+      progress += increment;
+      if (progress > 100) {
+        progress = 100;
+      }
+      setUploadPercent(Number(progress.toFixed(0)));
+      if (progress === 100) {
+        clearInterval(intervalId);
+        resolve(progress);
+      }
+    };
+    const intervalId = setInterval(update, interval);
+  });
+}
+
+/**
+ * Generates a random ID consisting of a timestamp and a random string.
+ * @returns {string} - The generated ID.
+ */
+
+export function generateRandomId(): string {
+  const timestamp: number = Date.now();
+  const randomStr: string = Math.random().toString(36).substring(2, 8);
+  return `${timestamp}-${randomStr}`;
+}
