@@ -21,7 +21,11 @@ const UploadProgress: React.FC<UploadProgressProps> = ({
 }) => {
   return (
     <Card>
-      <Space size={32} direction="horizontal" align="center">
+      <Space
+        direction="horizontal"
+        align="center"
+        style={{ display: "flex", justifyContent: "space-between" }}
+      >
         <Typography.Text type="secondary" data-testid="upload-status">
           {uploadStatus === Constants.UploadStateEnum.UPLOADED
             ? "Uploaded"
