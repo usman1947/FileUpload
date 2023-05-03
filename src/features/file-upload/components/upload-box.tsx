@@ -29,7 +29,7 @@ const UploadBox: React.FC<UploadBoxProps> = ({ setFileList }) => {
   };
 
   return (
-    <Dragger style={draggerStyle} {...draggerProps}>
+    <Dragger style={draggerStyle} {...draggerProps} data-testid="upload-box">
       <p className="ant-upload-drag-icon">
         <InboxOutlined />
       </p>

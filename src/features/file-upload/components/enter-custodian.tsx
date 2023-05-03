@@ -29,16 +29,22 @@ const EnterCustodian: React.FC<EnterCustodianProps> = ({
     addNewBatch();
   }
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} data-testid="enter-custodian-form">
       <Card style={{ width: "400px" }}>
         <Space size={32} direction="horizontal" align="center">
           <Input
             allowClear
             placeholder="Enter Custodian"
             required
+            data-testid="enter-custodian-input"
             onChange={(e) => setCustodian(e.target.value)}
           />
-          <Button type="primary" htmlType="submit" icon={<UploadOutlined />}>
+          <Button
+            type="primary"
+            htmlType="submit"
+            data-testid="enter-custodian-submit"
+            icon={<UploadOutlined />}
+          >
             Submit {fileList.length} Files
           </Button>
         </Space>

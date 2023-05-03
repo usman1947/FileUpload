@@ -31,22 +31,27 @@ const FileUpload: React.FC<FileUploadProps> = ({ addNewBatch }) => {
     }
   }, [fileList, uploadStatus]);
 
-  return uploadStatus === Constants.UploadStateEnum.UPLOADING ||
-    uploadStatus === Constants.UploadStateEnum.UPLOADED ? (
-    <UploadProgress
-      uploadPercent={uploadPercent}
-      custodian={custodian}
-      uploadStatus={uploadStatus}
-    />
-  ) : fileList.length > 0 ? (
-    <EnterCustodian
-      fileList={fileList}
-      setCustodian={setCustodian}
-      setUploadStatus={setUploadStatus}
-      addNewBatch={addNewBatch}
-    />
-  ) : (
-    <UploadBox setFileList={setFileList} />
+  return (
+    //shows upload progress and upload complete when status is UPLOADING or UPLOADED
+    uploadStatus === Constants.UploadStateEnum.UPLOADING ||
+      uploadStatus === Constants.UploadStateEnum.UPLOADED ? (
+      <UploadProgress
+        uploadPercent={uploadPercent}
+        custodian={custodian}
+        uploadStatus={uploadStatus}
+      />
+    ) : fileList.length > 0 ? (
+      // shows enter custodian input and submit button if files are added to upload queue
+      <EnterCustodian
+        fileList={fileList}
+        setCustodian={setCustodian}
+        setUploadStatus={setUploadStatus}
+        addNewBatch={addNewBatch}
+      />
+    ) : (
+      // shows upload box if no files are added to upload queue
+      <UploadBox setFileList={setFileList} />
+    )
   );
 };
 
