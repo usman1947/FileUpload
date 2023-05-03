@@ -30,7 +30,7 @@ const EnterCustodian: React.FC<EnterCustodianProps> = ({
   }
   return (
     <form onSubmit={onSubmit}>
-      <Card>
+      <Card style={{ width: "400px" }}>
         <Space size={32} direction="horizontal" align="center">
           <Input
             allowClear
