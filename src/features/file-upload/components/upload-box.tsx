@@ -9,7 +9,6 @@ interface UploadBoxProps {
 
 const draggerStyle: React.CSSProperties = {
   height: "300px",
-  width: "400px",
 };
 
 /**
@@ -29,7 +28,12 @@ const UploadBox: React.FC<UploadBoxProps> = ({ setFileList }) => {
   };
 
   return (
-    <Dragger style={draggerStyle} {...draggerProps} data-testid="upload-box">
+    <Dragger
+      style={draggerStyle}
+      {...draggerProps}
+      data-testid="upload-box"
+      className="container"
+    >
       <p className="ant-upload-drag-icon">
         <InboxOutlined />
       </p>
