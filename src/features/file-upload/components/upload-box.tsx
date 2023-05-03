@@ -7,6 +7,11 @@ interface UploadBoxProps {
   setFileList: React.Dispatch<React.SetStateAction<any[]>>;
 }
 
+const draggerStyle: React.CSSProperties = {
+  height: "250px",
+  width: "300px",
+};
+
 /**
  * Renders an upload box that allows a user to upload single or multiple files.
  *
@@ -24,7 +29,7 @@ const UploadBox: React.FC<UploadBoxProps> = ({ setFileList }) => {
   };
 
   return (
-    <Dragger {...draggerProps}>
+    <Dragger style={draggerStyle} {...draggerProps}>
       <p className="ant-upload-drag-icon">
         <InboxOutlined />
       </p>

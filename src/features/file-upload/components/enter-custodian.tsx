@@ -1,5 +1,5 @@
 import { UploadOutlined } from "@ant-design/icons";
-import { Input, Button, Space, UploadFile } from "antd";
+import { Input, Button, Space, UploadFile, Card } from "antd";
 import { Constants } from "../util";
 
 interface EnterCustodianProps {
@@ -23,17 +23,19 @@ const EnterCustodian: React.FC<EnterCustodianProps> = ({
 }) => {
   return (
     <form onSubmit={() => setUploadStatus(Constants.UploadStateEnum.UPLOADING)}>
-      <Space size={8} direction="vertical" align="center">
-        <Input
-          allowClear
-          placeholder="Enter Custodian"
-          required
-          onChange={(e) => setCustodian(e.target.value)}
-        />
-        <Button type="primary" htmlType="submit" icon={<UploadOutlined />}>
-          Submit {fileList.length} Files
-        </Button>
-      </Space>
+      <Card>
+        <Space size={32} direction="horizontal" align="center">
+          <Input
+            allowClear
+            placeholder="Enter Custodian"
+            required
+            onChange={(e) => setCustodian(e.target.value)}
+          />
+          <Button type="primary" htmlType="submit" icon={<UploadOutlined />}>
+            Submit {fileList.length} Files
+          </Button>
+        </Space>
+      </Card>
     </form>
   );
 };

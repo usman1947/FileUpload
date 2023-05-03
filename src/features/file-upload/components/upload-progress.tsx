@@ -1,8 +1,9 @@
-import { Progress, Space, Typography } from "antd";
-
+import { Progress, Space, Typography, Card } from "antd";
+import { Constants } from "../util";
 interface UploadProgressProps {
   uploadPercent: number;
   custodian: string;
+  uploadStatus: string;
 }
 
 /**
@@ -15,15 +16,22 @@ interface UploadProgressProps {
  */
 const UploadProgress: React.FC<UploadProgressProps> = ({
   uploadPercent,
+  uploadStatus,
   custodian,
 }) => {
   return (
-    <Space size={8} direction="vertical" align="center">
-      <Typography.Text type="secondary">
-        Uploading {custodian}...
-      </Typography.Text>
-      <Progress type="circle" percent={uploadPercent} />
-    </Space>
+    <Card>
+      <Space size={32} direction="horizontal" align="center">
+        <Typography.Text type="secondary" data-testid="upload-status">
+          {uploadStatus === Constants.UploadStateEnum.UPLOADED
+            ? "Uploaded"
+            : "Uploading"}{" "}
+          {custodian}
+          {!(uploadStatus === Constants.UploadStateEnum.UPLOADED) && "..."}
+        </Typography.Text>
+        <Progress type="circle" size="default" percent={uploadPercent} />
+      </Space>
+    </Card>
   );
 };
 
