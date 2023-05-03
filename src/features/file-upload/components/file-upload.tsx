@@ -9,6 +9,12 @@ interface FileUploadProps {
   addNewBatch: () => void;
 }
 
+/**
+ * Renders a file upload component with options for user to enter custodian.
+ *
+ * @param {Object} addNewBatch - function to add new batch to the upload queue
+ * @return {Object} - React component with upload functionality and custodian input
+ */
 const FileUpload: React.FC<FileUploadProps> = ({ addNewBatch }) => {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [uploadStatus, setUploadStatus] = useState<string>(

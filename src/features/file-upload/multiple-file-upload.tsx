@@ -20,6 +20,11 @@ const cardStyle: React.CSSProperties = {
   maxHeight: "100%",
 };
 
+/**
+ * Renders a component for uploading multiple files.
+ *
+ * @return {React.FC} A functional component that renders list of file upload component.
+ */
 const MultipleFileUpload: React.FC = () => {
   const [batchList, setBatchList] = useState<string[]>([
     Utils.generateRandomId(),
