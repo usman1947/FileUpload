@@ -1,7 +1,8 @@
 import { UploadOutlined } from "@ant-design/icons";
-import { Input, Button, Space, UploadFile, Card } from "antd";
+import { Input, Button, Space, UploadFile, Card, Grid } from "antd";
 import { Constants } from "../util";
 
+const { useBreakpoint } = Grid;
 interface EnterCustodianProps {
   setUploadStatus: React.Dispatch<React.SetStateAction<string>>;
   setCustodian: React.Dispatch<React.SetStateAction<string>>;
@@ -24,14 +25,19 @@ const EnterCustodian: React.FC<EnterCustodianProps> = ({
   addNewBatch,
   fileList,
 }) => {
+  const screens = useBreakpoint();
   function onSubmit(): void {
     setUploadStatus(Constants.UploadStateEnum.UPLOADING);
     addNewBatch();
   }
   return (
     <form onSubmit={onSubmit} data-testid="enter-custodian-form">
-      <Card style={{ width: "400px" }}>
-        <Space size={32} direction="horizontal" align="center">
+      <Card className="container">
+        <Space
+          size={screens.xs ? 16 : 32}
+          direction="horizontal"
+          align="center"
+        >
           <Input
             allowClear
             placeholder="Enter Custodian"
@@ -45,7 +51,7 @@ const EnterCustodian: React.FC<EnterCustodianProps> = ({
             data-testid="enter-custodian-submit"
             icon={<UploadOutlined />}
           >
-            Submit {fileList.length} Files
+            {!screens.xs && `Submit ${fileList.length} Files`}
           </Button>
         </Space>
       </Card>

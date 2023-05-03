@@ -20,7 +20,7 @@ const UploadProgress: React.FC<UploadProgressProps> = ({
   custodian,
 }) => {
   return (
-    <Card>
+    <Card className="container">
       <Space
         direction="horizontal"
         align="center"
