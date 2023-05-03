@@ -1,6 +1,6 @@
 import "./styles.css";
-import UploadFiles from "./features/upload-files";
+import FileUpload from "./features/file-upload";
 
 export default function App() {
-  return <UploadFiles />;
+  return <FileUpload />;
 }
