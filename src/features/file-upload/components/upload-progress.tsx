@@ -1,5 +1,8 @@
-import { Progress, Space, Typography, Card } from "antd";
+import { Progress, Space, Typography, Card, Grid } from "antd";
 import { Constants } from "../util";
+
+const { useBreakpoint } = Grid;
+
 interface UploadProgressProps {
   uploadPercent: number;
   custodian: string;
@@ -19,8 +22,13 @@ const UploadProgress: React.FC<UploadProgressProps> = ({
   uploadStatus,
   custodian,
 }) => {
+  const screens = useBreakpoint();
   return (
-    <Card className="container">
+    <Card
+      style={{
+        width: screens.xs ? "250px" : "400px",
+      }}
+    >
       <Space
         direction="horizontal"
         align="center"
@@ -33,7 +41,11 @@ const UploadProgress: React.FC<UploadProgressProps> = ({
           {custodian}
           {!(uploadStatus === Constants.UploadStateEnum.UPLOADED) && "..."}
         </Typography.Text>
-        <Progress type="circle" size="default" percent={uploadPercent} />
+        <Progress
+          type="circle"
+          size={screens.xs ? "small" : "default"}
+          percent={uploadPercent}
+        />
       </Space>
     </Card>
   );
