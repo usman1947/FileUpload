@@ -27,7 +27,8 @@ const EnterCustodian: React.FC<EnterCustodianProps> = ({
   fileList,
 }) => {
   const screens = useBreakpoint();
-  function onSubmit(): void {
+  function onSubmit(e: any): void {
+    e.preventDefault();
     setUploadStatus(Constants.UploadStateEnum.UPLOADING);
     addNewBatch();
   }
