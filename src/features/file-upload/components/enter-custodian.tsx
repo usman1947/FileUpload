@@ -1,6 +1,7 @@
 import { UploadOutlined } from "@ant-design/icons";
-import { Input, Button, Space, UploadFile, Card, Grid } from "antd";
+import { Input, Button, Space, UploadFile, Grid } from "antd";
 import { Constants } from "../util";
+import { StyledCard } from "../../../components/card";
 
 const { useBreakpoint } = Grid;
 interface EnterCustodianProps {
@@ -32,11 +33,7 @@ const EnterCustodian: React.FC<EnterCustodianProps> = ({
   }
   return (
     <form onSubmit={onSubmit} data-testid="enter-custodian-form">
-      <Card
-        style={{
-          width: screens.xs ? "250px" : "400px",
-        }}
-      >
+      <StyledCard>
         <Space
           direction="horizontal"
           align="center"
@@ -58,7 +55,7 @@ const EnterCustodian: React.FC<EnterCustodianProps> = ({
             {!screens.xs && `Submit ${fileList.length} Files`}
           </Button>
         </Space>
-      </Card>
+      </StyledCard>
     </form>
   );
 };
