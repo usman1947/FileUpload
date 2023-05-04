@@ -6,7 +6,7 @@ It's a simple file upload component that simulates the time required to upload e
 
 ## Usage
 
-App is currently deployed at
+App is currently deployed at:
 
 ```bash
 https://file-upload-sigma.vercel.app/
