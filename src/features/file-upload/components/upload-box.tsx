@@ -1,15 +1,11 @@
 import { InboxOutlined } from "@ant-design/icons";
-import { Upload, UploadProps } from "antd";
+import { Upload, UploadProps, Grid } from "antd";
 
 const { Dragger } = Upload;
-
+const { useBreakpoint } = Grid;
 interface UploadBoxProps {
   setFileList: React.Dispatch<React.SetStateAction<any[]>>;
 }
-
-const draggerStyle: React.CSSProperties = {
-  height: "300px",
-};
 
 /**
  * Renders an upload box that allows a user to upload single or multiple files.
@@ -18,6 +14,7 @@ const draggerStyle: React.CSSProperties = {
  * @return {JSX.Element} Returns a JSX element of an Ant Design Dragger component.
  */
 const UploadBox: React.FC<UploadBoxProps> = ({ setFileList }) => {
+  const screens = useBreakpoint();
   const draggerProps: UploadProps = {
     name: "file",
     multiple: true,
@@ -27,13 +24,13 @@ const UploadBox: React.FC<UploadBoxProps> = ({ setFileList }) => {
     },
   };
 
+  const draggerStyle: React.CSSProperties = {
+    height: "300px",
+    width: screens.xs ? "250px" : "400px",
+  };
+
   return (
-    <Dragger
-      style={draggerStyle}
-      {...draggerProps}
-      data-testid="upload-box"
-      className="container"
-    >
+    <Dragger style={draggerStyle} {...draggerProps} data-testid="upload-box">
       <p className="ant-upload-drag-icon">
         <InboxOutlined />
       </p>

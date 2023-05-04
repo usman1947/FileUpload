@@ -32,11 +32,15 @@ const EnterCustodian: React.FC<EnterCustodianProps> = ({
   }
   return (
     <form onSubmit={onSubmit} data-testid="enter-custodian-form">
-      <Card className="container">
+      <Card
+        style={{
+          width: screens.xs ? "250px" : "400px",
+        }}
+      >
         <Space
-          size={screens.xs ? 16 : 32}
           direction="horizontal"
           align="center"
+          style={{ display: "flex", justifyContent: "space-between" }}
         >
           <Input
             allowClear
