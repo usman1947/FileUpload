@@ -1,8 +1,6 @@
 import { InboxOutlined } from "@ant-design/icons";
-import { Upload, UploadProps, Grid } from "antd";
-
-const { Dragger } = Upload;
-const { useBreakpoint } = Grid;
+import { UploadProps } from "antd";
+import { StyledDragger } from "../../../components/dragger";
 interface UploadBoxProps {
   setFileList: React.Dispatch<React.SetStateAction<any[]>>;
 }
@@ -14,7 +12,6 @@ interface UploadBoxProps {
  * @return {JSX.Element} Returns a JSX element of an Ant Design Dragger component.
  */
 const UploadBox: React.FC<UploadBoxProps> = ({ setFileList }) => {
-  const screens = useBreakpoint();
   const draggerProps: UploadProps = {
     name: "file",
     multiple: true,
@@ -24,13 +21,8 @@ const UploadBox: React.FC<UploadBoxProps> = ({ setFileList }) => {
     },
   };
 
-  const draggerStyle: React.CSSProperties = {
-    height: "300px",
-    width: screens.xs ? "250px" : "400px",
-  };
-
   return (
-    <Dragger style={draggerStyle} {...draggerProps} data-testid="upload-box">
+    <StyledDragger {...draggerProps} data-testid="upload-box">
       <p className="ant-upload-drag-icon">
         <InboxOutlined />
       </p>
@@ -38,7 +30,7 @@ const UploadBox: React.FC<UploadBoxProps> = ({ setFileList }) => {
         Click or drag file to this area to upload
       </p>
       <p className="ant-upload-hint">Support for a single or bulk upload.</p>
-    </Dragger>
+    </StyledDragger>
   );
 };
 

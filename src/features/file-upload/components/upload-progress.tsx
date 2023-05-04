@@ -1,5 +1,6 @@
-import { Progress, Space, Typography, Card, Grid } from "antd";
+import { Progress, Space, Typography, Grid } from "antd";
 import { Constants } from "../util";
+import { StyledCard } from "../../../components/card";
 
 const { useBreakpoint } = Grid;
 
@@ -24,11 +25,7 @@ const UploadProgress: React.FC<UploadProgressProps> = ({
 }) => {
   const screens = useBreakpoint();
   return (
-    <Card
-      style={{
-        width: screens.xs ? "250px" : "400px",
-      }}
-    >
+    <StyledCard>
       <Space
         direction="horizontal"
         align="center"
@@ -47,7 +44,7 @@ const UploadProgress: React.FC<UploadProgressProps> = ({
           percent={uploadPercent}
         />
       </Space>
-    </Card>
+    </StyledCard>
   );
 };
 
